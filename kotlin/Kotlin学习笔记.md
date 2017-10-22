@@ -474,7 +474,7 @@ fun <P1, P2, P3, R> Function3<P1, P2, P3, R>.curried()
 
 偏函数：在科理化的基础上传入部分参数返回新函数
 
-## 22Android项目中的代码简化
+## 22、Android项目中的代码简化
 **如果只是要省略findViewById，kotlin支持插件kotlin-android-extensions**
 在build.gradle中添加``` apply plugin: 'kotlin-android-extensions' ``` 
 假如有以下button
@@ -511,6 +511,36 @@ Main3Activity接收参数
 ``` java
 textView2.text = intent.extras["key"]?.toString() ?: ""
 ```
+
+## 23、运算符重载
+重载invoke可以将()转换成特殊的扩展方法，该方法使用场景如下。
+
+``` kotlin
+open class Tag(val name: String) : Node {
+ val properties = HashMap<String, String>()
+
+    // string的拓展方法
+    // 括号被转换为带有正确参数的 invoke 参数   
+    operator fun String.invoke(value: String) {
+        properties[this] = value
+    }
+}
+
+fun html(block: Tag.() -> Unit): Tag {
+    return Tag("html").apply(block)
+}
+
+fun main(args: Array<String>) {
+    html {
+        "id"("htmlId")
+       ......
+    }.render().apply(::println)
+}
+```
+
+文档：http://www.kotlindoc.cn/Other/Opetator-overloading.html
+补充：http://blog.csdn.net/love667767/article/details/72589260
+
   [1]: https://www.kotlincn.net/docs/reference/
   [2]: http://coding.imooc.com/learn/list/108.html
  
