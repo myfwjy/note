@@ -11,4 +11,9 @@ grammar_cjkRuby: true
 ## 实现广播-receiver
 静态注册，注册完成一直接受广播；动态注册，跟随Activity的生命周期。
 ## 广播实现机制
+自定义广播接受者BroadcastReceiver，复写onReceive()
+通过Binder机制向AMS（Activity Manager Service）进行注册
+广播发送者通过Binder机制向AMS发送广播
+AMS查找符合相应条件的（利用IntentFilter Permission）BroadcastReceiver，将广播发送到BroadcastReceiver（一般情况下是Activity）相应的消息循环队列中。
+消息循环执行拿到此广播，回调BroadcastReceiver的onReceive()
 ## LocalBroadcast Manager
