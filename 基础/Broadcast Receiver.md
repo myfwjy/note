@@ -17,3 +17,5 @@ grammar_cjkRuby: true
 AMS查找符合相应条件的（利用IntentFilter Permission）BroadcastReceiver，将广播发送到BroadcastReceiver（一般情况下是Activity）相应的消息循环队列中。
 消息循环执行拿到此广播，回调BroadcastReceiver的onReceive()
 ## LocalBroadcast Manager
+只能在APP内部发送信息，比系统广播更高效。
+内部通过Handler实现，sendBroadcast()方法其实是通过Handler发送一个Message实现的。相比较与Binder来说更加高效，其他APP也无法发送该广播，而我们应用的广播也不会离开本应用。
