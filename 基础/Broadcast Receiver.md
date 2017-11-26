@@ -6,7 +6,7 @@ grammar_cjkRuby: true
 
 ## 广播
 一种广泛运用的在应用程序之间传递信息的机制，Android中我们要发送的广播内容是一个Intent，这个Intent中可以携带我们要传送的数据。
-同一APP的不同进程不同组件之间；不停APP的组件之间消息通信。
+同一APP的不同进程不同组件之间；不同APP的组件之间消息通信。
 普通广播Context.sendBroadcast；系统广播Context.sendOrderedBroadcast；只在自身APP传递的本地广播。
 ## 实现广播-receiver
 静态注册，注册完成一直接受广播；动态注册，跟随Activity的生命周期。
