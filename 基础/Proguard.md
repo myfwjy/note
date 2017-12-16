@@ -14,8 +14,10 @@ Proguard工具主要用于压缩、优化、混淆我们的代码，主作用可
 混淆
 混淆成无意义的名称，防止别人反编译之后读懂代码
 预检测
-在java平台上，对处理过的代码再次检测，保证class文件可执行。
+在java平台上，对处理过的代码再次检测，保证class文件可执行
 ## EntryPoint
 EntryPoint在Proguard中标注不被处理的类和方法。Proguard会从上述EntryPoint中开始遍历，找到那些没有用的类和方法，在压缩阶段移除，那些非Entry Point的类、方法都会被设置为private、static或final，不使用的参数会被移除，此外，有些方法会被标记为内联的，在混淆的步骤中，ProGuard会对非Entry Point的类和方法进行重命名。
 ## 作用
 对那些要发布的程序进行重新组织处理，使得代码有相同的功能但是完全不一样，不容易被反编译，即使被反编译，也不容易读懂。对外保存程序安全性。
+
+参考：https://www.cnblogs.com/cr330326/p/5534915.html
