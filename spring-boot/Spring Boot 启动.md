@@ -13,7 +13,6 @@ grammar_cjkRuby: true
 ![enter description here][1]
 
 
-  [1]: ./images/QQ%E6%88%AA%E5%9B%BE20180225204349.png "QQ截图20180225204349"
   -dev是开发时配置文件，-prod是生产时配置文件
   在application.yml中配置
   
@@ -43,3 +42,14 @@ girl:
   age: 18
 ```
 浏览器输入http://127.0.0.1:8081/hello或者http://127.0.0.1:8080/hello 能获取到不同的值。
+
+## Spring-Data-Jpa
+JPA(Java Persistence API) 定义了一系列对象持久化的标准，目前实现这一规范的产品有Hibernate、TopLink等。
+
+## Postman
+使用put提交数据时，要选择x-www-form-urlencoded
+![enter description here][2]
+
+
+  [1]: ./images/QQ%E6%88%AA%E5%9B%BE20180225204349.png "QQ截图20180225204349"
+  [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180225230427.png "QQ截图20180225230427"
