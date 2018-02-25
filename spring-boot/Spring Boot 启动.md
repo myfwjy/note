@@ -1,5 +1,5 @@
 ---
-title: Spring Boot 启动
+title: Spring Boot 笔记
 tags: Spring Boot
 grammar_cjkRuby: true
 ---
