@@ -88,3 +88,6 @@ JPA(Java Persistence API) 定义了一系列对象持久化的标准，目前实
   [5]: ./images/QQ%E6%88%AA%E5%9B%BE20180225233355.png "QQ截图20180225233355"
   [6]: ./images/QQ%E6%88%AA%E5%9B%BE20180225233407.png "QQ截图20180225233407"
   [7]: ./images/QQ%E6%88%AA%E5%9B%BE20180225233421.png "QQ截图20180225233421"
+  
+  ## cmd mvn build时跳过test
+  当我们在项目中写test，然后在cmd中进行mvn的build时，mvn会进行test。如果我们想跳过所有测试，可以使用：`mvn clean package -Dmaven.test.skip=true`
