@@ -40,6 +40,10 @@ CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达ser
 #### SpringServlet-config.xml
 ![enter description here][6]
 视图解析器，controller返回的都是逻辑视图，会交给视图解析器添加开头结尾。
+![enter description here][7]
+基于session/cookie的国际化，根据用户会话中设置的区域来解析。
+![enter description here][8]
+事务管理，用来保证数据库操作的原子性。
 
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
   [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
@@ -47,3 +51,5 @@ CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达ser
   [4]: ./images/QQ%E6%88%AA%E5%9B%BE20180331205801.png "QQ截图20180331205801"
   [5]: ./images/QQ%E6%88%AA%E5%9B%BE20180331210130.png "QQ截图20180331210130"
   [6]: ./images/QQ%E6%88%AA%E5%9B%BE20180331211517.png "QQ截图20180331211517"
+  [7]: ./images/QQ%E6%88%AA%E5%9B%BE20180331212640.png "QQ截图20180331212640"
+  [8]: ./images/QQ%E6%88%AA%E5%9B%BE20180331213548.png "QQ截图20180331213548"
