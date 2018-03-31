@@ -32,7 +32,10 @@ DispatcherServlet（前端控制器），来自前端的请求会先到达这里
 ![enter description here][4]
 DispatcherServlet拦截哪些url进行处理。
 ![enter description here][5]
-  
+ContextConfigLocation：配置上下文位置。
+ContextLoaderListener：在启动Web容器时，自动装配Spring applicationContext.xml的配置信息。
+ShiroFilter：拦截器部分交给shiro。
+CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达serlvet时，在httpServletResponse到达客户端之前修改头和数据。
 
 
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
