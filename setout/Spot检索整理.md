@@ -20,5 +20,21 @@ Session是服务端使用的记录客户端状态的机制，运行过程中生�
 ![enter description here][1]
 
 
+用户登录时提供用户名和密码，包装成token令牌交给Security Manager管理，shiro不能知道该用户是否合法，所以要交给Realm，由设计者自行判断，在Spot中使用的是mysql数据库存储。
+过滤器filter是通过回调函数使用，interceptor拦截器是通过代理，aop使用。
+shiro filter中的关键字anon是指没有参数，可以匿名使用，auth表示必须登录才能使用。注意路径匹配顺序，匹配到以后就不会继续匹配，所有通配符的要放在后面。
+![enter description here][2]
+
+
+  ### Spring MVC
+![enter description here][3]
+DispatcherServlet（前端控制器），来自前端的请求会先到达这里，它负责到后台去匹配合适的handler，在调用对应的controller、service、dao。使用serlvet需要对每一个请求配置对应的节点，DispatcherServlet会拦截所有的请求，然后去查找有没有合适的处理器。
+![enter description here][4]
+
+  
+
+
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
-  用户登录时提供用户名和密码，包装成token令牌交给Security Manager管理，shiro不能知道该用户是否合法，所以要交给Realm，由设计者自行判断，在Spot中使用的是mysql数据库存储。
+  [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
+  [3]: ./images/QQ%E6%88%AA%E5%9B%BE20180331204602.png "QQ截图20180331204602"
+  [4]: ./images/QQ%E6%88%AA%E5%9B%BE20180331205801.png "QQ截图20180331205801"
