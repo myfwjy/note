@@ -26,7 +26,8 @@ shiro filter中的关键字anon是指没有参数，可以匿名使用，auth表
 ![enter description here][2]
 
 
-  ### Spring MVC
+### Spring MVC
+#### web.xml
 ![enter description here][3]
 DispatcherServlet（前端控制器），来自前端的请求会先到达这里，它负责到后台去匹配合适的handler，在调用对应的controller、service、dao。使用serlvet需要对每一个请求配置对应的节点，DispatcherServlet会拦截所有的请求，然后去查找有没有合适的处理器。
 ![enter description here][4]
@@ -36,10 +37,13 @@ ContextConfigLocation：配置上下文位置。
 ContextLoaderListener：在启动Web容器时，自动装配Spring applicationContext.xml的配置信息。
 ShiroFilter：拦截器部分交给shiro。
 CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达serlvet时，在httpServletResponse到达客户端之前修改头和数据。
-
+#### SpringServlet-config.xml
+![enter description here][6]
+视图解析器，controller返回的都是逻辑视图，会交给视图解析器添加开头结尾。
 
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
   [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
   [3]: ./images/QQ%E6%88%AA%E5%9B%BE20180331204602.png "QQ截图20180331204602"
   [4]: ./images/QQ%E6%88%AA%E5%9B%BE20180331205801.png "QQ截图20180331205801"
   [5]: ./images/QQ%E6%88%AA%E5%9B%BE20180331210130.png "QQ截图20180331210130"
+  [6]: ./images/QQ%E6%88%AA%E5%9B%BE20180331211517.png "QQ截图20180331211517"
