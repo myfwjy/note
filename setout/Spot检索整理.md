@@ -30,7 +30,8 @@ shiro filter中的关键字anon是指没有参数，可以匿名使用，auth表
 ![enter description here][3]
 DispatcherServlet（前端控制器），来自前端的请求会先到达这里，它负责到后台去匹配合适的handler，在调用对应的controller、service、dao。使用serlvet需要对每一个请求配置对应的节点，DispatcherServlet会拦截所有的请求，然后去查找有没有合适的处理器。
 ![enter description here][4]
-
+DispatcherServlet拦截哪些url进行处理。
+![enter description here][5]
   
 
 
@@ -38,3 +39,4 @@ DispatcherServlet（前端控制器），来自前端的请求会先到达这里
   [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
   [3]: ./images/QQ%E6%88%AA%E5%9B%BE20180331204602.png "QQ截图20180331204602"
   [4]: ./images/QQ%E6%88%AA%E5%9B%BE20180331205801.png "QQ截图20180331205801"
+  [5]: ./images/QQ%E6%88%AA%E5%9B%BE20180331210130.png "QQ截图20180331210130"
