@@ -50,6 +50,10 @@ CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达ser
 ![enter description here][8]
 
 事务管理，用来保证数据库操作的原子性。
+### aws
+账号访问口令与密钥以及站点地址进行远程连接。指定上传的bucket、路径、文件名称等上传。上传删除都是在一个fixed线程池中完成，使用的是一个实现callable（比较runnable可以拿到返回值）去异步执行，然后由future拿到结果。
+### 图片压缩
+使用AffineTransformOp，根据计算下来的等比例之后的新的宽高生成图片。
 
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
   [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
