@@ -54,6 +54,14 @@ CharacterEncodingFilter：同意编码过滤器，在httpServletRequest到达ser
 账号访问口令与密钥以及站点地址进行远程连接。指定上传的bucket、路径、文件名称等上传。上传删除都是在一个fixed线程池中完成，使用的是一个实现callable（比较runnable可以拿到返回值）去异步执行，然后由future拿到结果。
 ### 图片压缩
 使用AffineTransformOp，根据计算下来的等比例之后的新的宽高生成图片。
+### runnable callable future
+runnable，可以通过thread.start方法启动自己的run方法，和thread需要继承相比，runable只需要实现接口就可以了，不用为每一个子线程启动一个thread。不能返回结果，不能抛出异常。
+callale通常和future搭配使用。是一个参数泛型接口，可以返回结果和抛出异常。通常利用ExecutorService的submit方法去启动call方法自执行任务，而ExecutorService的submit又返回一个Future类型的结果。利用FutureTask封装Callable再由Thread去启动。
+future可以获取任务的结果，判断任务是否完成，中断任务；Future的get方法很好的替代的了Thread.join或Thread,join(long millis)；Future的get方法可以判断程序代码(任务)的执行是否超时。
+(thread.join让主线程等待子线程执行完毕之后再继续执行)
+参考：https://www.cnblogs.com/MOBIN/p/6185387.html
+### 线程池
+上传图片时，使用到了fixedThreadPool。使用线程池可以避免过多的创建和销毁的开销，可以控制线程数量，可以提供定时执行，间隔执行。
 
   [1]: ./images/871676-20160722213407794-1894786938.png "871676-20160722213407794-1894786938"
   [2]: ./images/QQ%E6%88%AA%E5%9B%BE20180331201954.png "QQ截图20180331201954"
