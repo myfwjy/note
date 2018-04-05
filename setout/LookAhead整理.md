@@ -11,3 +11,4 @@ deviceToken是设备的一个标识符，属于你这款APP装在你这个设备
 
 为了保证安全性，APNs用连接信任(connection trust)和token信任(token trust)来控制通信入口，你要用APNs则必须用通过这两种验证。
 连接信任是provider必须有开发者官网申请申请的证书，token信任是每次发送给苹果服务器的信息要带token。
+代码中，先拿到证书和证书密码和apns建立连接，然后创建payload，里面带有需要发送的信息，还有图标小红圈、铃音之类的，最后带着devicetoken推送出去。
