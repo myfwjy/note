@@ -19,5 +19,11 @@ deviceToken是设备的一个标识符，属于你这款APP装在你这个设备
 ###  更新计划行程拥堵信息
 定时去数据库中获取需要更新的行程，然后包装发送给docomo api获取组成行程的坐标集，做成csv文件上传给s3，通过apns推送给用户更新信息，存储csv文件地址，客户端之后可以通过地址去s3上获取行程计划。
 ### 冗余信息是什么
-无效的devicetoken信息。
+定期清理无效的devicetoken。
+### mybatis配置使用的整体过程
+mybatis是一款持久层框架，支持定制sql、存储过程和高级映射。
+声明jdbc.properties文件，设置数据库源信息。
+在上下文配置文件.xml中配置DB数据源，添加SqlSessionFactoryBean的配置，添加SqlSessionTemplate的配置。
+在dao层中注入SqlSessionTemplate，使用他的selectone或者selectlist方法，传入类全名和方法名。
+
 
