@@ -23,4 +23,4 @@ Uri uri = Uri.fromFile(currentFiles[position]);
 ```
 
 ### 与服务端数据同步
-通过服务端的api做数据同步。
+通过服务端的api做数据同步。使用HttpClientManager进行post和get请求，拿到json之后使用Gson转成entity。
