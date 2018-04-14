@@ -12,5 +12,15 @@ grammar_cjkRuby: true
 ### 图片压缩
 启动相册（intent中配置type和action），选取照片之后拿到资源的uri，调用系统截取功能（com.android.camera.action.CROP），设置宽高比和截取之后图片的宽高大小，截取的结果返回一个Intent，获取里面的图片数据，缓存到本地sd存储中，上传一份到服务端。
 ### 启动其他音乐播放器
-### ListView
+
+``` java
+Uri uri = Uri.fromFile(currentFiles[position]);
+                                String suffix = FileUtil.getFileEnd(currentFiles[position].getAbsolutePath());
+                                Intent mIntent = new Intent();
+                                mIntent.setAction(android.content.Intent.ACTION_VIEW);
+                                mIntent.setDataAndType(uri, "audio/" + suffix);
+                                startActivity(mIntent);
+```
+
 ### 与服务端数据同步
+通过服务端的api做数据同步。
