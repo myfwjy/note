@@ -21,5 +21,23 @@ Column-based数据库的核心思想：按照列来在数据文件中记录数�
 #### column superColumn columnFamily
 column是一组key-value，superColumn内的数据可以一个column，也可以是一组columns，columnFamily相当于关系型数据库中的表，里面一个key-value形式，value是一组columns。
 ![enter description here](http://img.my.csdn.net/uploads/201203/6/0_133099905646lp.gif)
+#### Partition Key，Clustering Key，Primary Key以及Composite Key
+
+``` sql
+1 create table sample {
+2     key_one text,
+3     key_two text,
+4     data text,
+5     PRIMARY KEY(key_one, key_two)
+6 };
+```
+
+创建的Primary Key就是一个由两个列key_one和key_two组成的Composite Key。其中该Composite Key的第一个组成被称为是Partition Key，而后面的各组成则被称为是Clustering Key。**Partition Key用来决定Cassandra会使用集群中的哪个结点来记录该数据(hash计算)**，每个Partition Key对应着一个特定的Partition。**而Clustering Key则用来在Partition内部排序**。
+
+在一个CQL语句中，**WHERE等子句所标示的条件只能使用在Primary Key中所使用的列**。
+
+一个好的Partition Key设计常常会大幅提高程序的运行性能。首先，由于Partition Key用来控制哪个结点记录数据，因此Partition Key可以决定是否数据能够较为均匀地分布在Cassandra的各个结点上，以充分利用这些结点。同时在Partition Key的帮助下，您的读请求应尽量使用较少数量的结点。这是因为在执行读请求时，Cassandra需要协调处理从各个结点中所得到的数据集。因此在响应一个读操作时，较少的结点能够提供较高的性能。因此在模型设计中，如何根据所需要运行的各个请求指定模型的Partition Key是整个设计过程中的一个关键。一个取值均匀分布的，却常常在请求中作为输入条件的域，常常是一个可以考虑的Partition Key。
+
+除此之外，我们也应该好好地考虑如何设置模型的Clustering Key。由于Clustering Key可以用来在Partition内部排序，因此其对于包含范围筛选的各种请求的支持较好。
 
 
