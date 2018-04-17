@@ -18,5 +18,8 @@ Key-Value数据库常常用来作为服务端缓存使用，以记录一系列�
 按照列来在数据文件中记录数据，以获得更好的请求及遍历效率。
 ![enter description here](https://images2015.cnblogs.com/blog/126867/201603/126867-20160320201122365-651136759.png)
 Column-based数据库的核心思想：按照列来在数据文件中记录数据，以获得更好的请求及遍历效率。这里有两点需要注意：首先，Column-based数据库并不表示会将所有的数据按列进行组织，也没有那个必要。对某些需要执行请求的数据进行按列存储即可。另外一点则是，Cassandra对Query的支持实际上是与其所使用的数据模型关联在一起的。也就是说，对Query的支持很有限。
+#### column superColumn columnFamily
+column是一组key-value，superColumn内的数据可以一个column，也可以是一组columns，columnFamily相当于关系型数据库中的表，里面一个key-value形式，value是一组columns。
+![enter description here](http://img.my.csdn.net/uploads/201203/6/0_133099905646lp.gif)
 
 
