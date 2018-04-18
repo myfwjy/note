@@ -126,5 +126,5 @@ public class StudentDao extends BaseCassandraDao {
     }......
 }
 ```
-由于登陆之后才能确定keyspace，所以使用cql语句执行数据库操作。
+由于登陆之后才能确定keyspace，所以使用cql语句执行数据库操作或者使用CassandraTemplate。
 
