@@ -39,5 +39,92 @@ column是一组key-value，superColumn内的数据可以一个column，也可以
 一个好的Partition Key设计常常会大幅提高程序的运行性能。首先，由于Partition Key用来控制哪个结点记录数据，因此Partition Key可以决定是否数据能够较为均匀地分布在Cassandra的各个结点上，以充分利用这些结点。同时在Partition Key的帮助下，您的读请求应尽量使用较少数量的结点。这是因为在执行读请求时，Cassandra需要协调处理从各个结点中所得到的数据集。因此在响应一个读操作时，较少的结点能够提供较高的性能。因此在模型设计中，如何根据所需要运行的各个请求指定模型的Partition Key是整个设计过程中的一个关键。一个取值均匀分布的，却常常在请求中作为输入条件的域，常常是一个可以考虑的Partition Key。
 
 除此之外，我们也应该好好地考虑如何设置模型的Clustering Key。由于Clustering Key可以用来在Partition内部排序，因此其对于包含范围筛选的各种请求的支持较好。
+#### v3 流程
+创建一个cassandra.properties文件，配置数据库连接属性。
 
+``` xml
+cassandra.contactPoints=xxx.xxx.xxx.xxx
+cassandra.port=9042
+cassandra.userName=username
+cassandra.password=password
+cassandra.keyspaceName=mydefault
+```
+配置cassandra上下文，因为要使用注解获取CassandraTemplate
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cassandra="http://www.springframework.org/schema/data/cassandra"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/data/cassandra
+    http://www.springframework.org/schema/data/cassandra/spring-cassandra.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 引入cassandra配置 -->
+ 	<context:property-placeholder location="classpath:cassandra.properties" ignore-unresolvable="true"/>
+
+	<!-- REQUIRED: The Cassandra Cluster -->
+	<cassandra:cluster contact-points="${cassandra.contactPoints}" port="${cassandra.port}" 
+	   username="${cassandra.userName}" password="${cassandra.password}" />
+
+	<!-- REQUIRED: The Cassandra Session, built from the Cluster, and attaching to a keyspace -->
+	<cassandra:session keyspace-name="${cassandra.keyspaceName}" />
+
+	<!-- REQUIRED: The Default Cassandra Mapping Context used by CassandraConverter -->
+	<cassandra:mapping entity-base-packages="com.sherry.db.entity.cassandra">
+	   <cassandra:user-type-resolver keyspace-name="${cassandra.keyspaceName}" />
+	</cassandra:mapping>
+
+	<!-- REQUIRED: The Default Cassandra Converter used by CassandraTemplate -->
+	<cassandra:converter />
+
+	<!-- REQUIRED: The Cassandra Template is the building block of all Spring Data Cassandra -->
+	<cassandra:template id="cassandraTemplate" />
+
+	<!-- 自动扫描(自动注入)  DAO层位置-->
+    <context:component-scan base-package="com.sherry.db.operation.cassandra" />
+</beans>
+```
+在entity目录下声明keyspace对象
+
+``` java
+@Table
+public class Student {
+    @PrimaryKey
+    private int id;
+    private String name; 
+    // get set toStirng省略 
+}
+```
+创建dao层
+
+``` java
+public class BaseCassandraDao {
+ 
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+ 
+    @Autowired
+    private CassandraTemplate template;
+ 
+    protected CassandraTemplate getTemplate() {
+        return template;
+    }
+	protected CqlOperations getCqlOperations() {
+		return template.getCqlOperations();
+	}
+}
+@Repository
+public class StudentDao extends BaseCassandraDao {
+    public void insert() {
+        logger.info("##########insert start");
+        boolean result = getCqlOperations().execute("insert into mycas.student(id, name, course) values(2,'Ben',{courseid:2,coursename:'literature'})");
+        logger.info("##########insert end, result=" + result);
+    }......
+}
+```
+由于登陆之后才能确定keyspace，所以使用cql语句执行数据库操作。
 
