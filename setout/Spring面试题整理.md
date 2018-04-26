@@ -5,12 +5,12 @@ grammar_cjkRuby: true
 ---
 
 Spring是一个轻量级的控制反转（IOC）和面向切面（AOP）的容器框架。
+http://www.importnew.com/11657.html
 ### Spring的优点
 轻量级（框架小），控制反转（低耦合），AOP（业务逻辑和系统服务分离），容器（管理对象生命周期），MVC框架，事物管理，异常处理（全局异常处理）
 ### BeanFactory
 BeanFactory是工厂模式的一种实现，它使用控制反转将应用的配置和依赖与实际的应用代码分离开来。
 最常用的BeanFactory实现是XmlBeanFactory类。它根据XML文件中定义的内容加载beans。该容器从XML文件中读取配置元数据，并用它来创建一个完备的系统或应用。
-http://www.importnew.com/11657.html
 ### aop
 面向切面编程，代码运行时动态插入代码，降低耦合度，能添加辅助功能，参考logger和事物。
 ### IOC
