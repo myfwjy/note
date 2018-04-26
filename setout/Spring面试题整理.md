@@ -42,7 +42,12 @@ https://www.cnblogs.com/cenyu/p/6289209.html
 ApplicationContext继承BeanFactory接口，Spring的核心工厂就是BeanFactory，ApplicationContext是会在加载配置文件时初始化Bean。ApplicationContext可以进行国际化的对应，bean的自动装配等。
 ### Spring Bean
 Spring Beans是构成Spring应用核心的Java对象。这些对象由Spring IOC容器实例化、组装、管理。这些对象通过容器中配置的元数据创建，例如，使用XML文件中定义的创建。
-在Spring中创建的beans都是单例的beans。在bean标签中有一个属性为”singleton”,如果设为true，该bean是单例的，如果设为false，该bean是原型bean。Singleton属性默认设置为true。因此，spring框架中所有的bean都默认为单例bean。
+Spring Bean中定义了所有的配置元数据，这些配置信息告知容器如何创建它，它的生命周期是什么以及它的依赖关系。
+### Spring Bean的作用域
+在Spring中创建一个bean的时候，通过’scope’属性定义即可。例如，当Spring需要产生每次一个新的bean实例时，应该声明bean的scope属性为prototype。如果每次你希望Spring返回一个实例，应该声明bean的scope属性为singleton，**单例Bean不是线程安全的**。（singleton prototype request session globalsession）
+### bean最重要的生命周期？以及如何重写
+有两个重要的bean生命周期方法。第一个是setup方法，该方法在容器加载bean的时候被调用。第二个是teardown方法，该方法在bean从容器中移除的时候调用。
+bean标签有两个重要的属性(init-method 和 destroy-method)，你可以通过这两个属性定义自己的初始化方法和析构方法。Spring也有相应的注解：@PostConstruct 和 @PreDestroy。
 ### SpringBoot
 ### OOP
 封装
