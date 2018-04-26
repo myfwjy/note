@@ -58,4 +58,3 @@ bean标签有两个重要的属性(init-method 和 destroy-method)，你可以�
 一个类实例的相同方法在不同情况下有不同的表现。比如游戏里面的攻击效果。
 ### 常见算法
 https://blog.csdn.net/yuexianchang/article/details/76369819
-![enter description here](./images/1524756340469.jpg)
