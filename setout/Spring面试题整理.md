@@ -12,7 +12,36 @@ http://www.importnew.com/11657.html
 BeanFactory是工厂模式的一种实现，它使用控制反转将应用的配置和依赖与实际的应用代码分离开来。
 最常用的BeanFactory实现是XmlBeanFactory类。它根据XML文件中定义的内容加载beans。该容器从XML文件中读取配置元数据，并用它来创建一个完备的系统或应用。
 ### aop
-面向切面编程，代码运行时动态插入代码，降低耦合度，能添加辅助功能，参考logger和事物。
+在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程。
+AOP的核心就是切面，它将多个类的通用行为封装为可重用的模块。根据需求的不同，一个应用程序可以有若干切面。在Spring AOP中，切面通过带有@Aspect注解的类实现。
+Concern(核心逻辑)：表示在应用程序中一个模块的行为。Concern可以定义为我们想要实现的功能。
+Cross-cutting concern(横向的通用逻辑)：指的是整个应用程序都会用到的功能，它影响整个应用程序。例如，日志管理（Logging）、安全管理（Security）以及数据交互是应用程序的每个模块都要涉及到的，因此这些都属于Cross-cutting concern。
+
+``` java
+@Aspect  
+@Component
+public class LogAspect {
+    private final Logger logger = LoggerFactory.getLogger(LogAspect.class);
+
+    @Before(value = "execution(* com.fujitsu.tti.web.*.controller.*.*(..))")  
+    public void before(JoinPoint joinPoint) {
+        String className = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        logger.info(className + "#" + methodName);
+    }
+
+    @After(value = "execution(* com.fujitsu.tti.web.*.controller.*.*(..))")
+    public void after(JoinPoint joinPoint) {
+        String className = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        logger.info(className + "#" + methodName);
+    }
+}
+
+ <!-- 激活组件扫描功能,扫描aop的相关组件组件 -->
+<context:component-scan base-package="com.fujitsu.tti.core.aop"/>
+```
+
 ### IOC
 参考IOC的文档
 ### jdbc和Dao
@@ -48,6 +77,11 @@ Spring Bean中定义了所有的配置元数据，这些配置信息告知容器
 ### bean最重要的生命周期？以及如何重写
 有两个重要的bean生命周期方法。第一个是setup方法，该方法在容器加载bean的时候被调用。第二个是teardown方法，该方法在bean从容器中移除的时候调用。
 bean标签有两个重要的属性(init-method 和 destroy-method)，你可以通过这两个属性定义自己的初始化方法和析构方法。Spring也有相应的注解：@PostConstruct 和 @PreDestroy。
+### @Autowired
+@Autowired 注解提供自动装配在何处完成以及如何完成。它可以像@Required一样自动装配setter方法、构造器、属性或者具有任意名称和/或多个参数的PN方法。
+### JDBC
+使用Spring JDBC框架，资源管理以及错误处理的代价都会减轻。开发人员只需通过statements和queries语句从数据库中存取数据。Spring框架中通过使用模板类能更有效的使用JDBC，也就是所谓的JdbcTemplate(例子)。
+JdbcTemplate类提供了许多方法，为我们与数据库的交互提供了便利。例如，它可以将数据库的数据转化为原生类型或对象，执行写好的或可调用的数据库操作语句，提供自定义的数据库错误处理功能。
 ### SpringBoot
 ### OOP
 封装
