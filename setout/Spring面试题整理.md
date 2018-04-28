@@ -23,14 +23,14 @@ Cross-cutting concern(横向的通用逻辑)：指的是整个应用程序都会
 public class LogAspect {
     private final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    @Before(value = "execution(* com.fujitsu.tti.web.*.controller.*.*(..))")  
+    @Before(value = "execution(* com.web.*.controller.*.*(..))")  
     public void before(JoinPoint joinPoint) {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
         logger.info(className + "#" + methodName);
     }
 
-    @After(value = "execution(* com.fujitsu.tti.web.*.controller.*.*(..))")
+    @After(value = "execution(* com.web.*.controller.*.*(..))")
     public void after(JoinPoint joinPoint) {
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
